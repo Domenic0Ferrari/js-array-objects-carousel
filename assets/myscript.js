@@ -36,9 +36,19 @@ const containerHighlighted = document.querySelector('.highlighted');
 const containerThumbs = document.querySelector('.thumbs');
 
 for (let i = 0; i < images.length; i++) {
-	containerHighlighted.innerHTML += `<img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">`;
+	containerHighlighted.innerHTML += `<div>
+    <img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">
+    <div class="${i == 0 ? 'active' : ''}">${images[i].title}</div>
+    <div class="${i == 0 ? 'active' : ''}">${images[i].text}</div>
+ </div>`;
+
 	containerThumbs.innerHTML += `<img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">`;
 }
+
+// for (let i = 0; i < images.length; i++) {
+// 	containerHighlighted.innerHTML += `<img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">`;
+// 	containerThumbs.innerHTML += `<img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">`;
+// }
 
 
 // selezionimo le immagini nell'html
