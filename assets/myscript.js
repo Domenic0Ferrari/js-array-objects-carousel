@@ -52,8 +52,7 @@ for (let i = 0; i < images.length; i++) {
 // }
 
 // diamo una timing-function
-
-setInterval(() => {
+document.getElementById("myBtn").addEventListener("click", function(){
     listHighlighted[activeIndex].classList.remove("active");
     listThumbs[activeIndex].classList.remove("active");
     activeIndex++;
@@ -63,6 +62,17 @@ setInterval(() => {
     listHighlighted[activeIndex].classList.add("active");
     listThumbs[activeIndex].classList.add("active");
 }, 2000);
+
+// setInterval(() => {
+//     listHighlighted[activeIndex].classList.remove("active");
+//     listThumbs[activeIndex].classList.remove("active");
+//     activeIndex++;
+//     if (activeIndex >= listHighlighted.length) {
+//         activeIndex = 0;
+//     }
+//     listHighlighted[activeIndex].classList.add("active");
+//     listThumbs[activeIndex].classList.add("active");
+// }, 2000);
 
 // selezionimo le immagini nell'html
 const listHighlighted = document.querySelectorAll('.highlighted .img_container');
