@@ -37,42 +37,14 @@ const containerThumbs = document.querySelector('.thumbs');
 
 for (let i = 0; i < images.length; i++) {
     containerHighlighted.innerHTML +=`
-	<div class="img_container ${i == 0 ? 'active' : ''}">
-        <img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">
+	<div class="img_container${i == 0 ? ' active' : ''}">
+        <img src="${images[i].image}" alt="" ">
         <h2 class="title">${images[i].title}</h2>
         <p class="text">${images[i].text}</p>
     </div>`;
     containerThumbs.innerHTML +=
         `<img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">`;
 }
-
-// for (let i = 0; i < images.length; i++) {
-// 	containerHighlighted.innerHTML += `<img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">`;
-// 	containerThumbs.innerHTML += `<img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">`;
-// }
-
-// diamo una timing-function
-document.getElementById("myBtn").addEventListener("click", function(){
-    listHighlighted[activeIndex].classList.remove("active");
-    listThumbs[activeIndex].classList.remove("active");
-    activeIndex++;
-    if (activeIndex >= listHighlighted.length) {
-        activeIndex = 0;
-    }
-    listHighlighted[activeIndex].classList.add("active");
-    listThumbs[activeIndex].classList.add("active");
-}, 2000);
-
-// setInterval(() => {
-//     listHighlighted[activeIndex].classList.remove("active");
-//     listThumbs[activeIndex].classList.remove("active");
-//     activeIndex++;
-//     if (activeIndex >= listHighlighted.length) {
-//         activeIndex = 0;
-//     }
-//     listHighlighted[activeIndex].classList.add("active");
-//     listThumbs[activeIndex].classList.add("active");
-// }, 2000);
 
 // selezionimo le immagini nell'html
 const listHighlighted = document.querySelectorAll('.highlighted .img_container');
@@ -87,48 +59,52 @@ const btnNext = document.querySelector('.btn-next');
 // cioe' l'indice dell'immagine attiva
 let activeIndex = 0;
 
-btnNext.addEventListener('click',
-	function() {
-		// dall'immagine attiva tolgo la classe active
-		listHighlighted[activeIndex].classList.remove('active');
-		listThumbs[activeIndex].classList.remove('active');
-		// settiamo il nuovo valore di active index
-		activeIndex++;
-		if (activeIndex >= listHighlighted.length) {
-			activeIndex = 0;
-		}
-		// alla nuova immagine attiva aggiungiamo la classe active
-		listHighlighted[activeIndex].classList.add('active');
-		listThumbs[activeIndex].classList.add('active');
-	}
-);
+btnNext.addEventListener('click',showNextTime);
 
-btnPrev.addEventListener('click',
-	function() {
-		// dall'immagine attiva tolgo la classe active
-		listHighlighted[activeIndex].classList.remove('active');
-		listThumbs[activeIndex].classList.remove('active');
-		// settiamo il nuovo valore di active index
-		activeIndex--;
-		if (activeIndex < 0) {
-			activeIndex = listHighlighted.length - 1;
-		}
-		// alla nuova immagine attiva aggiungiamo la classe active
-		listHighlighted[activeIndex].classList.add('active');
-		listThumbs[activeIndex].classList.add('active');
-	}
-);
+btnPrev.addEventListener('click',showPrevTime);
 
 // ciclo per aggiungere gli event listeners alle miniature
 for (let i = 0; i < listThumbs.length; i++) {
-	listThumbs[i].addEventListener('click',
-		function() {
-			console.log('cliccata la miniature in posizione ' + i)
-			listHighlighted[activeIndex].classList.remove('active');
-			listThumbs[activeIndex].classList.remove('active');
-			activeIndex = i;
-			listHighlighted[activeIndex].classList.add('active');
-			listThumbs[activeIndex].classList.add('active');
-		}
-	)
+	listThumbs[i].addEventListener('click', clickPosition)
+}
+
+// Iterare ogni due secondi 
+
+setInterval(showNextTime, 2000);
+
+
+// FUNCTION
+
+function showNextTime(){
+    listHighlighted[activeIndex].classList.remove("active");
+    listThumbs[activeIndex].classList.remove("active");
+    activeIndex++;
+    if (activeIndex >= listHighlighted.length) {
+        activeIndex = 0;
+    }
+    listHighlighted[activeIndex].classList.add("active");
+    listThumbs[activeIndex].classList.add("active");
+}
+
+function showPrevTime() {
+    // dall'immagine attiva tolgo la classe active
+    listHighlighted[activeIndex].classList.remove('active');
+    listThumbs[activeIndex].classList.remove('active');
+    // settiamo il nuovo valore di active index
+    activeIndex--;
+    if (activeIndex < 0) {
+        activeIndex = listHighlighted.length - 1;
+    }
+    // alla nuova immagine attiva aggiungiamo la classe active
+    listHighlighted[activeIndex].classList.add('active');
+    listThumbs[activeIndex].classList.add('active');
+}
+
+function clickPosition() {
+    console.log('cliccata la miniature in posizione ' + i)
+    listHighlighted[activeIndex].classList.remove('active');
+    listThumbs[activeIndex].classList.remove('active');
+    activeIndex = i;
+    listHighlighted[activeIndex].classList.add('active');
+    listThumbs[activeIndex].classList.add('active');
 }
